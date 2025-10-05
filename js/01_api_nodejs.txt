@@ -1,0 +1,1296 @@
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------ APIREST EN NODEJS -------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||                                                                                                                                                                    |||
+||| --  01. ENTORNO DE DESARROLLO                                                                                                                                      |||
+||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
+||| --  03. BASE DE DATOS                                                                                                                                              |||
+||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
+||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
+|||                                                                                                                                                                    |||
+||| --  ANEXOS: TENER EN CUENTA                                                                                                                                        |||
+||| --          AX_01.  Subir el Proyecto a Github                                                                                                                     |||
+||| --          AX_02.  Clonar un proyecto de Github                                                                                                                   |||
+||| --          AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP'                                                                                                     |||
+||| --          AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP'                                                                                                      |||
+||| --          AX_05.  Puesta en Marcha del Proyecto                                                                                                                  |||
+|||                                                                                                                                                                    |||
+||| --  Bibliografía  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
+|||                   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                   |||
+|||                                                                                                                                                                    |||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||                                                                                                                                                                    |||
+||| --  01. ENTORNO DE DESARROLLO                                                                                                                                      |||
+||| --      01.01.  Instalar Visual Studio Code                                                                                                                        |||
+||| --      01.02.  Instalar Node Js                                                                                                                                   |||
+||| --      01.03.  Modificar Directivas en PowerShell                                                                                                                 |||
+||| --      01.04.  Instalar Git                                                                                                                                       |||
+||| --      01.05.  Crear cuenta en 'Github'                                                                                                                           |||
+||| --      01.06.  Instalar XAMPP                                                                                                                                     |||
+||| --      01.07.  Instalar Postman                                                                                                                                   |||
+||| --  02. ESTRUCTURA DEL PROYECTO                                                                                                                                    |||
+||| --      02.01.  Crear la estructura de carpetas y los archivos del proyecto                                                                                        |||
+||| --      02.02.  Crear el 'package.json'                                                                                                                            |||
+||| --      02.03.  Instalar dependencias al 'backend/'                                                                                                                |||
+||| --  03. BASE DE DATOS                                                                                                                                              |||
+||| --      03.01.  Codificar la base de datos 'database/db_node.sql'                                                                                                  |||
+||| --      03.02.  Ejecutar la base de datos 'database/db_node.sql'                                                                                                   |||
+||| --  04. CÓDIGO DEL PROYECTO                                                                                                                                        |||
+||| --      04.01.  Codificar la cadena de conexión en 'backend/config/config.js'                                                                                      |||
+||| --      04.02.  Codificar el modelo usuarios en 'backend/models/user.js'                                                                                           |||
+||| --      04.03.  Codificar la key en 'backend/config/keys.js'                                                                                                       |||
+||| --      04.04.  Codificar el Jason Web Token con la key en 'backend/config/passport.js'                                                                            |||
+||| --      04.05.  Codificar la API de usuarios en 'backend/controllers/userController.js'                                                                            |||
+||| --      04.06.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js'                                                                                     |||
+||| --      04.07.  Codificar el servidor en 'backend/server.js'                                                                                                       |||
+||| --      04.08.  Ejecutar el Servidor 'server.js'                                                                                                                   |||
+||| --  05. PRUEBAS DE LA API CON POSTMAN                                                                                                                              |||
+||| --      05.01.  Crear la Colección 'USUARIOS'                                                                                                                      |||
+||| --      05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS'                                                                         |||
+||| --      05.03.  Configurar 'GET raiz'                                                                                                                              |||
+||| --      05.04.  Configurar 'POST userCreate'                                                                                                                       |||
+||| --      05.05.  Configurar 'POST login'                                                                                                                            |||
+||| --      05.06.  Configurar 'GET usersAll'                                                                                                                          |||
+||| --      05.07.  Configurar 'GET userById'                                                                                                                          |||
+||| --      05.08.  Configurar 'POST userUpdate'                                                                                                                       |||
+||| --      05.09.  Configurar 'DELETE userDelete'                                                                                                                     |||
+|||                                                                                                                                                                    |||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||-------------------------------------------------------------------- 01. ENTORNO DE DESARROLLO ---------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.01.  Instalar Visual Studio Code: --------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'Visual Studio Code': https://code.visualstudio.com/download.
+
+            02. Instalar Visual Studio Code.
+
+                    ⦿   En el asistente de instalación dejar marcado:   ☑ 'Agregar PATH…'.                    
+
+            03. Abrir Visual Studio Code.
+
+            04. Instalar las siguientes extensiones en Visual Studio Code:
+
+                    ⦿   Material Icon Theme                    
+                    ⦿   Live Server  
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.02.  Instalar Node Js: -------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'node.js': https://nodejs.org/es/.
+
+            02. Instalar node.js.
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.03.  Modificar Directivas en PowerShell: -------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Abrir el PowerShell de Windows
+            
+            02. Ejecutar el siguiente comando
+
+                    ⦿   PS C:\..\..> Get-ExecutionPolicy
+                    ⦿   Restricted
+
+            03. Si aparece 'Restricted', hay que cambiarla a 'Unrestricted' de la siguiente forma:
+
+                    ⦿   PS C:\..\..> Set-ExecutionPolicy -Scope CurrentUser
+
+                          cmdlet Set-ExecutionPolicy en la posición 1 de la canalización de comandos
+                          Proporcione valores para los parámetros siguientes:
+                          ExecutionPolicy: Unrestricted
+
+            04. Verificar la versión de 'node' y 'npm':
+
+                    ⦿   PS C:\..\..> node --version
+                    ⦿   PS C:\..\..> npm --version
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.04.  Instalar Git: -----------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'XAMPP': https://www.apachefriends.org/es/download.html.
+
+            02. Instalar Git.
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.05.  Crear cuenta en 'Github': -----------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'XAMPP': https://www.apachefriends.org/es/download.html.
+
+            02. Seguir los pasos de creación de la cuenta.
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.06.  Instalar XAMPP: ---------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'XAMPP': https://www.apachefriends.org/es/download.html.
+
+            02. Instalar XAMPP.
+
+            03. Abrir el 'XAMPP Control Panel' y ejecutar los servicios de 'Apache' y 'MySQL'.
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  NOTA:   
+                    
+                    ⦿   Verificar que los puertos sean: En Apache (:80) y de MySQL (:3306).
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 01.07.  Instalar Postman: -------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Descargar 'Postman': https://www.postman.com/downloads/. Este programa nos sirve para realizar probar las peticiones HTTP.
+
+            02. Instalar Postman.
+            
+            03. Abrir Postman.
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------- 02. ESTRUCTURA DEL PROYECTO --------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.01.  Crear la estructura de carpetas y los archivos del proyecto: ------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                      
+                                                                                                                                                      
+                                                                                                                                                      # C = Carpetas
+                                                                                                                                                      # A = Archivos
+
+                        proyecto/                                                   # C. Backend y Frontend de un proyecto móvil.
+                        ├── backend/                                                # C. Lógica del servidor Node.js para la gestión de datos y API.
+                        │   ├── config/                                             # C. Configuración del backend (base de datos, claves).
+                        │   │   ├── config.js                                       # A. Configuración principal del backend (variables de entorno, etc.).
+                        │   │   ├── keys.js                                         # A. Claves secretas para seguridad (JWT, servicios externos).
+                        │   │   └── passport.js                                     # A. Configuración para la autenticación de usuarios (login, registro).
+                        │   ├── controllers/                                        # C. Funciones para manejar las peticiones HTTP y la lógica.
+                        │   │   └── userController.js                               # A. Controlador para las operaciones relacionadas con los usuarios.
+                        │   ├── middlewares/                                        # C. 
+                        │   │   └── authMiddleware.js                               # A. 
+                        │   ├── models/                                             # C. Estructura de datos que se utilizarán en la base de datos.
+                        │   │   └── user.js                                         # A. Esquema del modelo de usuario (campos en la base de datos).
+            (NO CREAR)  │   ├── node_modules/                                       # C. Dependencias (librerías) instaladas para el backend.
+                        │   ├── routes/                                             # C. Endpoints (rutas) de la API del backend.
+                        │   │   └── userRoutes.js                                   # A. Define las rutas para las operaciones relacionadas con usuarios.
+            (NO CREAR)  │   ├── package-lock.json                                   # A. Versiones exactas de las dependencias del backend.
+            (NO CREAR)  │   ├── package.json                                        # A. Manifiesto del backend (nombre, dependencias, scripts, etcs).
+                        │   └── server.js                                           # A. Servidor node.js.
+                        └── database/                                               # C. Lógica del servidor Node.js para la gestión de datos y API.
+                            └── db_node.sql                                         # A. Base de datos del proyecto
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.02.  Crear el 'package.json': ------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01.  Abrir una terminal en Visual Studio Code ('Terminal / New Terminal' ó 'Ctrl + Shift + ñ')
+
+            02. Cambiar el nombre de la terminal a 'backend', seleccionándola en la parte inferior derecha y presionando F2 / Rename...
+            
+            03. Cambiar el color de la terminal 'backend', dando click derecho / Chage Color... / Seleccionar el color
+            
+            04. En la Terminal de 'Visual Studio Code' digitar lo siguiente:
+
+                    ⦿   PS C:\..\..> cd backend
+                    ⦿   PS C:\..\backend> npm init
+
+                            This utility will walk you through creating a package.json file.
+                            It only covers the most common items, and tries to guess sensible defaults.
+
+                            See `npm help init` for definitive documentation on these fields
+                            and exactly what they do.
+
+                            Use `npm install <pkg>` afterwards to install a package and
+                            save it as a dependency in the package.json file.
+
+                            Press ^C at any time to quit.
+                            package name: (backend) nodejs
+                            version: (1.0.0)
+                            description: API Backend
+                            entry point: (server.js) server.js
+                            test command:
+                            git repository:
+                            keywords: NodeJs
+                            author: Albeiro Ramos
+                            license: (ISC) MIT
+                            About to write to C:\Users\Instructor\Documents\_albe_\react_native\backend\package.json:
+
+                            {
+                              "name": "nodejs",
+                              "version": "1.0.0",
+                              "description": "Backend de la app de prueba 'my-app' de React Native",
+                              "main": "server.js",
+                              "scripts": {
+                                "test": "echo \"Error: no test specified\" && exit 1"
+                              },
+                              "keywords": [
+                                "ReactNative",
+                                "NodeJs"
+                              ],
+                              "author": "Instructor Albeiro Ramos",
+                              "license": "MIT"
+                            }
+
+                            Is this OK? (yes) yes
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 02.03.  Instalar dependencias al 'backend/': -------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    ⦿   PS C:\..\backend> npm i express@4.21.2
+                    ⦿   PS C:\..\backend> npm i http@0.0.1-security
+                    ⦿   PS C:\..\backend> npm i cors@2.8.5
+                    ⦿   PS C:\..\backend> npm i morgan@1.10.0
+                    ⦿   PS C:\..\backend> npm i mysql@2.18.1
+                    ⦿   PS C:\..\backend> npm i bcryptjs@3.0.2
+                    ⦿   PS C:\..\backend> npm i passport@0.4.1
+                    ⦿   PS C:\..\backend> npm i passport-jwt@4.0.1
+                    ⦿   PS C:\..\backend> npm i jsonwebtoken@9.0.2
+                    ⦿   PS C:\..\backend> npm i dotenv
+                    ⦿   PS C:\..\backend> npm audit fix
+                    ⦿   PS C:\..\backend> npm audit fix --force
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------ 03. BASE DE DATOS -------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 03.01. Codificar la base de datos 'database/db_node.sql': -----------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   CREATE SCHEMA db_node DEFAULT CHARACTER SET utf8 ;
+                    02   USE db_node;
+                    03 
+                    04   CREATE TABLE users (
+                    05     id BIGINT NOT NULL AUTO_INCREMENT,
+                    06     email VARCHAR(180) NOT NULL UNIQUE,
+                    07     name VARCHAR(90) NOT NULL,
+                    08     lastname VARCHAR(90) NOT NULL,
+                    09     phone VARCHAR(90) NOT NULL UNIQUE,
+                    10     image VARCHAR(255) NULL,
+                    11     password VARCHAR(90) NOT NULL,
+                    12     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    13     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    14     PRIMARY KEY (id)
+                    15   ) ENGINE=InnoDB;
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 03.02. Ejecutar la base de datos 'database/db_node.sql': ------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Abrir el navegador y escribir http://localhost/phpmyadmin/
+            
+            02. Dar click a 'Importar'
+            
+            03. Dar click a 'Seleccionar archivo'
+            
+            04. Seleccionar el archivo 'C:\..\..\proyecto\database\db_node.sql'
+            
+            05. Dar click a 'Importar'
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------- 04. CÓDIGO DEL PROYECTO ----------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.01.  Codificar la cadena de conexión en 'backend/config/config.js': ----------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   const mysql = require('mysql');
+                    02   const db = mysql.createConnection({
+                    03     host: 'localhost',
+                    04     user: 'root',
+                    05     password: '',
+                    06     database: 'db_node',
+                    07     port: 3306
+                    08   });
+                    09   db.connect(function(err) {
+                    10     if (err) throw err;
+                    11     console.log('Base de datos conectada')
+                    12   });
+                    13   module.exports = db;
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.02.  Codificar el modelo usuarios en 'backend/models/user.js': ---------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   const db = require('../config/config');
+                    02   const bcrypt = require('bcryptjs');
+                    03   const User = {};
+                    04   User.findAll = (result) => {
+                    05     const sql = `SELECT id, email, name, lastname, phone, image, created_at, updated_at FROM users`;
+                    06     db.query(sql, (err, users) => {
+                    07       if (err) {
+                    08         console.log('Error al listar usuarios: ', err);
+                    09         result(err, null);
+                    10       } else {
+                    11         console.log('Usuarios encontrados: ', users.length);
+                    12         result(null, users);
+                    13       }
+                    14     });
+                    15   };
+                    16   User.findById = (id, result) => {
+                    17     const sql = `SELECT id, email, name, lastname, image, password FROM users WHERE id = ?`;
+                    18     db.query(sql,
+                    19       [id], (err, user) => {
+                    20         if (err) {
+                    21           console.log('Error al consultar: ', err);
+                    22           result(err, null);
+                    23         }
+                    24         else {
+                    25           console.log('Usuario consultado: ',  user[0] );
+                    26           result(null, user[0]);
+                    27         }
+                    28       }
+                    29     );
+                    30   };
+                    31   User.findByEmail = (email, result) => {
+                    32     const sql = `SELECT id, email, name, lastname, image, phone, password FROM users WHERE email = ?`;
+                    33     db.query(
+                    34       sql,
+                    35       [email], 
+                    36       (err, user) => {
+                    37         if (err) {
+                    38           console.log('Error al consultar: ', err);
+                    39           result(err, null);
+                    40         }
+                    41         else {
+                    42           console.log('Usuario consultado: ',  user[0] );
+                    43           result(null, user[0]);
+                    44         }
+                    45       }
+                    46     );
+                    47   };
+                    48   User.create = async (user, result) => {
+                    49     const hash = await bcrypt.hash(user.password, 10)
+                    50     const sql = `INSERT INTO USERS(
+                    51                   email, 
+                    52                   name, 
+                    53                   lastname,
+                    54                   phone,
+                    55                   image,
+                    56                   password,
+                    57                   created_at,
+                    58                   updated_at
+                    59                 ) VALUES (?,?,?,?,?,?,?,?)`;
+                    60     db.query(sql,
+                    61       [
+                    62         user.email,
+                    63         user.name,
+                    64         user.lastname,
+                    65         user.phone,
+                    66         user.image,
+                    67         hash,
+                    68         new Date(),
+                    69         new Date()
+                    70       ], (err, res) => {
+                    71         if (err) {
+                    72           console.log('Error al crear al Usuario: ', err);
+                    73           result(err, null);
+                    74         } else {
+                    75           console.log('Usuario creado: ', {id: res.insertId, ...user});
+                    76           result(null, {id: res.insertId, ...user});
+                    77         }
+                    78       }
+                    79     );
+                    80   };
+                    81   User.update = async (user, result) => {
+                    82     let fields = [];
+                    83     let values = [];
+                    84 
+                    85     // Si viene contraseña, la hasheamos
+                    86     if (user.password) {
+                    87       const hash = await bcrypt.hash(user.password, 10);
+                    88       fields.push("password = ?");
+                    89       values.push(hash);
+                    90     }
+                    91 
+                    92     if (user.email) {
+                    93       fields.push("email = ?");
+                    94       values.push(user.email);
+                    95     }
+                    96     if (user.name) {
+                    97       fields.push("name = ?");
+                    98       values.push(user.name);
+                    99     }
+                   100     if (user.lastname) {
+                   101       fields.push("lastname = ?");
+                   102       values.push(user.lastname);
+                   103     }
+                   104     if (user.phone) {
+                   105       fields.push("phone = ?");
+                   106       values.push(user.phone);
+                   107     }
+                   108     if (user.image) {
+                   109       fields.push("image = ?");
+                   110       values.push(user.image);
+                   111     }
+                   112
+                   113     fields.push("updated_at = ?");
+                   114     values.push(new Date());
+                   115
+                   116     const sql = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
+                   117     values.push(user.id);
+                   118 
+                   119     db.query(sql, values, (err, res) => {
+                   120       if (err) {
+                   121         console.log('Error al actualizar usuario: ', err);
+                   122         result(err, null);
+                   123       } else {
+                   124         console.log('Usuario actualizado: ', { id: user.id, ...user });
+                   125         result(null, { id: user.id, ...user });
+                   126       }
+                   127     });
+                   128   };
+                   129   User.delete = (id, result) => {
+                   130     const sql = `DELETE FROM users WHERE id = ?`;
+                   131     db.query(sql, [id], (err, res) => {
+                   132       if (err) {
+                   133         console.log('Error al eliminar usuario: ', err);
+                   134         result(err, null);
+                   135       } else {
+                   136         console.log('Usuario eliminado con id: ', id);
+                   137         result(null, res);
+                   138       }
+                   139     });
+                   140   };
+                   141
+                   142   module.exports = User;
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.03.  Codificar la key en 'backend/config/keys.js': ---------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Ingrese a la siguiente página: https://www.vondy.com/random-key-generator--ZzGGMYgS?lc=5 (o en alguna página que genere códigos de 256
+                bit de forma aleatoria) para generar una clave de 256 bits; cópiela y péguela en el archivo 'backend/config/keys.js', quedando de la 
+                siguiente forma:
+
+                    01   module.exports = {
+                    02     secretOrKey: 'e9f94f8d3a1e6d7c2b3f9e5a7c8d4f2b7a0e1d3c4f5b6a7e9f8d0c3b4a6d2e1'
+                    03   }
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+                    
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.04.  Codificar el Jason Web Token con la key en 'backend/config/passport.js': ------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                    
+                    01   const JwtStrategy = require('passport-jwt').Strategy;
+                    02   const ExtractJwt = require('passport-jwt').ExtractJwt;
+                    03   const Keys = require('./keys');
+                    04   const User = require('../models/user');
+                    05   module.exports = (passport) => {
+                    06     let opts = {};
+                    07     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+                    08     opts.secretOrKey = Keys.secretOrKey;
+                    09     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+                    10       User.findById(jwt_payload.id, (err, user) => {
+                    11         if (err) {
+                    12           return done(err, false);
+                    13         }
+                    14         if (user) {
+                    15           return done(null, user);
+                    16         }
+                    17         else{
+                    18           return done(null, false);
+                    19         }
+                    20       });
+                    21     }));
+                    22   }
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.05.  Codificar la API de usuarios en 'backend/controllers/userController.js': ------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+                    01   const User = require('../models/user');
+                    02   const bcrypt = require('bcryptjs');
+                    03   const jwt = require('jsonwebtoken');
+                    04   const keys = require('../config/keys');
+                    05   module.exports = {
+                    06     login(req, res) {
+                    07       const email = req.body.email;
+                    08       const password = req.body.password;
+                    09       User.findByEmail(email, async (err, myUser) => {
+                    10         if (err) {
+                    11           return res.status(501).json({
+                    12             success: false,
+                    13             message: 'Error al consultar el usuario',
+                    14             error: err
+                    15           });
+                    16         }
+                    17         if (!myUser) {
+                    18           return res.status(401).json({
+                    19             success: false,
+                    20             message: 'El email no existe en la base de datos'
+                    21           });
+                    22         }
+                    23         const isPasswordValid = await bcrypt.compare(password, myUser.password);
+                    24         if (isPasswordValid) {
+                    25           const token = jwt.sign({ id: myUser.id, email: myUser.email }, keys.secretOrKey, {});
+                    26           const data = {
+                    27             id: myUser.id,
+                    28             email: myUser.email,
+                    29             name: myUser.name,
+                    30             lastname: myUser.lastname,
+                    31             image: myUser.image,
+                    32             phone: myUser.phone,
+                    33             session_token: `JWT ${token}`
+                    34           }
+                    35           return res.status(201).json({
+                    36             success: true,
+                    37             message: 'Usuario autenticado ',
+                    38             data: data
+                    39           });
+                    40         }
+                    41         else {
+                    42           return res.status(401).json({
+                    43             success: false,
+                    44             message: 'Contraseña o correo incorrecto'
+                    45           });
+                    46         }
+                    47       });
+                    48     },
+                    49     getAllUsers(req, res) {
+                    50       User.findAll((err, users) => {
+                    51         if (err) {
+                    52           return res.status(501).json({
+                    53             success: false,
+                    54             message: 'Error al listar usuarios',
+                    55             error: err
+                    56           });
+                    57         }
+                    58         return res.status(200).json({
+                    59           success: true,
+                    60           message: 'Lista de usuarios',
+                    61           data: users
+                    62         });
+                    63       });
+                    64     },
+                    65     getUserById(req, res) {
+                    66       const id = req.params.id;
+                    67       User.findById(id, (err, user) => {
+                    68         if (err) {
+                    69           return res.status(501).json({
+                    70             success: false,
+                    71             message: 'Error al consultar el usuario',
+                    72             error: err
+                    73           });
+                    74         }
+                    75         if (!user) {
+                    76           return res.status(404).json({
+                    77             success: false,
+                    78             message: 'Usuario no encontrado'
+                    79           });
+                    80         }
+                    81         return res.status(200).json({
+                    82           success: true,
+                    83           message: 'Usuario encontrado',
+                    84           data: user
+                    85         });
+                    86       });
+                    87     },
+                    88     register(req, res) {
+                    89       const user = req.body;
+                    90       User.create(user, (err, data) => {
+                    91         if (err) {
+                    92           return res.status(501).json ({
+                    93             success: false,
+                    94             message: 'Error al crear al usuario',
+                    95             error: err
+                    96           });
+                    97         } else {
+                    98           return res.status(201).json({
+                    99             success: true,
+                   100             message: 'Creado el Usuario',
+                   101             data: data
+                   102           });
+                   103         }
+                   104       });
+                   105     },
+                   106     getUserUpdate(req, res) {
+                   107       const user = req.body;
+                   108       User.update(user, (err, data) => {
+                   109         if (err) {
+                   110           return res.status(501).json({
+                   111             success: false,
+                   112             message: 'Error al actualizar el usuario',
+                   113             error: err
+                   114           });
+                   115         }
+                   116         return res.status(200).json({
+                   117           success: true,
+                   118           message: 'Usuario actualizado',
+                   119           data: data
+                   120         });
+                   121       });
+                   122     },
+                   123     getUserDelete(req, res) {
+                   124       const id = req.params.id;
+                   125       User.delete(id, (err, data) => {
+                   126         if (err) {
+                   127           return res.status(501).json({
+                   128             success: false,
+                   129             message: 'Error al eliminar el usuario',
+                   130             error: err
+                   131           });
+                   132         }
+                   133         return res.status(200).json({
+                   134           success: true,
+                   135           message: 'Usuario eliminado',
+                   136           data: data
+                   137         });
+                   138       });
+                   139     }
+                   140   }
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.06.  Codificar la ruta de usuario en 'backend/routes/userRoutes.js': ---------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                    
+                    01   const userController = require('../controllers/userController');
+                    02   module.exports = (app) => {
+                    03     app.get('/api/users', userController.getAllUsers);
+                    04     app.get('/api/users/:id', userController.getUserById);
+                    05     app.post('/api/users/create', userController.register);
+                    06     app.put('/api/users/update', userController.getUserUpdate);
+                    07     app.delete('/api/users/delete/:id', userController.getUserDelete);
+                    08     app.post('/api/users/login', userController.login);
+                    09   }
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.07.  Codificar el servidor en 'backend/server.js': ---------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Verificar la dirección IPv4 del dispositivo. Abra una nueva terminal en 'Visual Studio Code' y ejecutar los siguientes comandos:
+            
+                    ⦿   C:\..\backend> ipconfig
+
+                            Dirección IPv4. . . . . . . . . . . . . . : 192.168.1.77
+
+            02. En la línea 20 del archivo 'backend/server.js', escribir la dirección IPv4 encontrada, quedando de la siguiente forma:                    
+                    
+                    01   const express = require('express');
+                    02   const passport = require('passport');
+                    03   const app = express();
+                    04   const http = require('http');
+                    05   const server = http.createServer(app);
+                    06   const logger = require('morgan');
+                    07   const cors = require('cors');
+                    08   const usersRoutes = require('./routes/userRoutes');
+                    09   const port = process.env.PORT || 3000;
+                    10   app.use(logger('dev'));
+                    11   app.use(express.json());
+                    12   app.use(express.urlencoded({ extended: true }));
+                    13   app.use(cors());
+                    14   app.use(passport.initialize());
+                    15   app.use(passport.session());
+                    16   require('./config/passport')(passport);
+                    17   app.disable('x-powered-by');
+                    18   app.set('port', port);
+                    19   usersRoutes(app);
+                    20   server.listen(3000, '192.168.1.77' || 'localhost', function(){
+                    21     console.log('App node.js ' + process.pid + ' ejecutando en ' + server.address().address + ':' + server.address().port);
+                    22   });
+                    23   app.get('/', (req, res) => {
+                    24     res.send('Ruta raíz del Backend');
+                    25   });
+                    26   app.get('/test', (req, res) => {
+                    27     res.send('Ruta TEST');
+                    28   });
+                    29   app.use((err, req, res, next) => {
+                    30     console.log(err);
+                    31     res.status(err.status || 500).send(err.stack);
+                    32   });
+
+                ┌ --------------------------------------------------------------------------------------------------------------------------------------- ┐
+                |                                                                                                                                         |
+                  EXPLICACIÓN:   
+                    
+                    ⦿   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+
+                |---------------------------------------------------------------------------------------------------------------------------------------- |
+                
+                    A.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                    B.   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+                |                                                                                                                                         |
+                └ --------------------------------------------------------------------------------------------------------------------------------------- ┘
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 04.08.  Ejecutar el Servidor 'server.js': ---------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Iniciar el servidor 'backend' desde la terminal de Visual Studio Code.
+
+                    ⦿   PS C:\..\backend> node server.js
+            
+            02. Debe aparecer en la terminal, texto similar a lo siguiente:
+            
+                    App node.js 14124 ejecutando en 192.168.1.77:3000
+                    Base de datos conectada
+
+                    ⦿   Para detener el servidor, ubíquese en la terminal de Visual Studio Code y presione 'CTRL + C'.
+
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||---------------------------------------------------------------- 05. PRUEBAS DE LA API CON POSTMAN -----------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.01.  Crear la Colección 'USUARIOS': ------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Dar click a 'New / Collection'
+            
+            02. Dar click a 'New Collection' y escribir 'USUARIOS'
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.02.  Crear los métodos HTTP (GET, POST, PUT, DELETE) de la Colección 'USUARIOS': ---------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'USUARIOS' (En el Panel Lateral Izquierdo) y seleccionar 'Add request'
+            
+            02. Dar click a los tres puntos (...) que están ubicados al lado derecho de 'GET New Request' y seleccionar 'Rename', escribir 'raiz'
+            
+            03. Repetir los pasos 01 y 02 para el método: 'userCreate', 'login', 'usersAll', 'userById', 'userCreate', 'userUpdate' y 'userDelete'
+
+            04. Seleccionar el método 'userCreate' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            05. Seleccionar el método 'login' / dar click al control de lista 'GET   ▼' / Seleccionar 'POST' / Presionar 'CTRL + S'
+            
+            06. Seleccionar el método 'userUpdate' / dar click al control de lista 'GET   ▼' / Seleccionar 'PUT' / Presionar 'CTRL + S'
+            
+            07. Seleccionar el método 'userDelete' / dar click al control de lista 'GET   ▼' / Seleccionar 'DELETE' / Presionar 'CTRL + S'
+           
+            
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.03.  Configurar 'GET raiz': --------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET raiz'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API (ENDPOINT: Locations.php): 
+                'http://192.168.1.77:3000/'
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   Ruta raíz del Backend
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.04.  Configurar 'POST userCreate': -------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'POST userCreate'
+            
+            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/create): 'http://192.168.1.77:3000/api/users/create'
+
+            03. Dar click a 'Body / raw / JSON'
+            
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02     "email": "micorreo@gmail.com",
+                    03     "name": "Pedro Nel",
+                    04     "lastname": "Dominguez",
+                    05     "phone": "741852",
+                    06     "image": "yyyy",
+                    07     "password": "9876546"
+                    08   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Creado el Usuario",
+                    04       "data": {
+                    05           "id": 1,
+                    06           "email": "micorreo@gmail.com",
+                    07           "name": "Pedro Nel",
+                    08           "lastname": "Dominguez",
+                    09           "phone": "741852",
+                    10           "image": "yyyy",
+                    11           "password": "9876546"
+                    12       }
+                    13   }
+
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya creado el registro
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.05.  Configurar 'POST login': ------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'POST login'
+            
+            02. Escribir en el control de texto (al frente de 'POST   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/login): 'http://192.168.1.77:3000/api/users/login'
+
+            03. Dar click a 'Body / raw / JSON'
+            
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02     "email": "micorreo@gmail.com",
+                    03     "password": "9876546"
+                    04   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario autenticado ",
+                    04       "data": {
+                    05           "id": 1,
+                    06           "email": "micorreo@gmail.com",
+                    07           "name": "Pedro Nel",
+                    08           "lastname": "Dominguez",
+                    09           "image": "yyyy",
+                    10           "phone": "741852",
+                    11           "session_token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                                    eyJpZCI6MSwiZW1haWwiOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3NTc2MDkwNTR9.
+                                    -HS8TwWsPTlYZDddsvVjH7JTLuvTYPgn5AGNH2Xpf0k"
+                    12       }
+                    13   }
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.06.  Configurar 'GET usersAll': ----------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET usersAll'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users): 'http://192.168.1.77:3000/api/users'
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Lista de usuarios",
+                    04       "data": [
+                    05           {
+                    06               "id": 1,
+                    07               "email": "micorreo@gmail.com",
+                    08               "name": "Pedro Nel",
+                    09               "lastname": "Dominguez",
+                    10               "phone": "741852",
+                    11               "image": "yyyy",
+                    12               "created_at": "2025-09-11T23:23:37.000Z",
+                    13               "updated_at": "2025-09-11T23:23:37.000Z"
+                    14           },
+                    15           {
+                    16   ......  
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.07.  Configurar 'GET userById': ----------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'GET userById'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/:id): 'http://192.168.1.77:3000/api/users/1'
+
+            03. Dar click a 'Send'
+            
+            04. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario encontrado",
+                    04       "data": {
+                    05           "id": 1,
+                    06           "email": "micorreo@gmail.com",
+                    07           "name": "Pedro Nel",
+                    08           "lastname": "Dominguez",
+                    09           "image": "yyyy",
+                    10           "password": "$2b$10$tGV1SOghgYWFQGvIUI45ou1Gn0IExm9JxJadAbrnV5sSrYC1tpmQO"
+                    11       }
+                    12   }                    
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.08.  Configurar 'POST userUpdate': -------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Seleccionar el método 'POST userUpdates'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/update): 'http://192.168.1.77:3000/api/users/update'
+
+            03. Dar click a 'Body / raw / JSON'
+
+            04. Escribir el siguiente arreglo (clave: valor) en formato JSON:
+
+                    01   {
+                    02     "id": "1",
+                    03     "email": "pepito@perez.com",
+                    04     "name": "Pepe",
+                    05     "lastname": "Perez",
+                    06     "phone": "3203203210",
+                    07     "image": "yyyy",
+                    08     "password": "12345"
+                    09   }
+            
+            05. Dar click a 'Send'
+            
+            06. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario actualizado",
+                    04       "data": {
+                    05           "id": "1",
+                    06           "email": "pepito@perez.com",
+                    07           "name": "Pepe",
+                    08           "lastname": "Perez",
+                    09           "phone": "3203203210",
+                    10           "image": "yyyy",
+                    11           "password": "12345"
+                    12       }
+                    13   }
+
+            07. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya actualizado el registro
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- 05.09.  Configurar 'DELETE userDelete': -------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+            01. Seleccionar el método 'DELETE userDelete'
+            
+            02. Escribir en el control de texto (al frente de 'GET   ▼' | Enter URL or describe the request to Postbot |) la URL de la API 
+                (ENDPOINT: /api/users/delete/:id): 'http://192.168.1.77:3000/api/users/delete/1'
+
+
+            03. Dar click a 'Body / raw / JSON'
+
+            04. Dar click a 'Send'
+            
+            05. Verificar que la parte inferior aparezca el siguiente código:
+
+                    01   {
+                    02       "success": true,
+                    03       "message": "Usuario eliminado",
+                    04       "data": {
+                    05           "fieldCount": 0,
+                    06           "affectedRows": 1,
+                    07           "insertId": 0,
+                    08           "serverStatus": 2,
+                    09           "warningCount": 0,
+                    10           "message": "",
+                    11           "protocol41": true,
+                    12           "changedRows": 0
+                    13       }
+                    14   }
+
+            06. Ir a 'http://localhost/phpmyadmin/', para verificar que en la base de datos 'db_node' (tabla 'users'), se haya eliminado el registro
+
+
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||------------------------------------------------------------------------------ ANEXOS ------------------------------------------------------------------------------|||
+||| ------------------------------------------------------------------------- TENER EN CUENTA -------------------------------------------------------------------------|||
+|||--------------------------------------------------------------------------------------------------------------------------------------------------------------------|||
+|||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_01.  Subir el proyecto a un repositorio 'Github': ----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            Para evitar confusiones y seguir los pasos correctamente, la carpeta raíz del proyecto se llamará 'proyecto'.
+            
+            01. Verificar que no haya una cuenta de 'Github' asociada al computador, para ello, debe abrir el 'Panel de Control', dar click en 'Cuentas 
+                de usuario / Administrar credenciales de Windows'. Si hay una cuenta asociada 'git:https://github.com', dar click sobre la cuenta y click
+                sobre la opción 'Quitar'. 
+            
+                    ⦿   De no funcionar este método porque no tiene acceso al Panel de control, pruebe abriendo el 'Windows PowerShell' y digite el 
+                         siguiente comando:
+
+                         PS C:\..\..> echo "protocol=https`nhost=github.com`n" | git credential-manager erase
+            
+            02. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. Dar click a 'New'.
+                En el control de texto 'Repository name', escribir el nombre de la carpeta raíz de su proyecto (ejemplo, 'proyecto'. La carpeta raíz no debe 
+                tener espacios, ni caracteres compuesto, ni caracteres especiales) y dar click en 'Create Repository'.
+
+                    ⦿   Si no tiene cuenta en 'GitHub', debe crear una.
+            
+            03. Click derecho sobre la carpeta raíz (ejemplo, 'proyecto') y seleccionar la opción 'Open Git Bash here'; si no se 
+                encuentra la opción, hay que instalar 'Git'.
+            
+            04. En el 'Git Bash' escribir lo siguiente:
+
+                    $ git config --global user.name "nombre de su cuenta"
+                    $ git config --global user.email "correo de su cuenta"
+
+                    $ git init
+                    $ git branch -M main
+                    $ git remote add origin https://github.com/SenaProfeAlbeiro/proyecto.git
+                    $ git add .
+                    $ git commit -m "Subiendo Proyecto"
+                    $ git push -u origin main
+
+            05. Va a aparecer una ventana denominada 'Connect to Github', dar click en la opción 'Sign in with your browser', dar click en 'Authentication 
+                Succeeded'. Verificar que se haya abierto en el navegador en donde tiene la cuenta activa, de lo contrario hay que escribir nuevamente las
+                credenciales de 'Github'. En el 'Git Bash' debe aparecer texto similar al siguiente:
+
+                    Enumerating objects: 3, done.
+                    Counting objects: 100% (3/3), done.
+                    Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
+                    Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+                    To https://github.com/SenaProfeAlbeiro/proyecto.git
+                    * [new branch]      main -> main
+                    branch 'main' set up to track 'origin/main'.
+            
+            06. Actualizar la ventana del navegador donde se encuentra abierta su cuenta de 'Github'
+            
+            07. Para actualizar la información del proyecto en 'Github', en el 'Git bash' escribir los siguientes comandos:
+
+                    $ git add .
+                    $ git commit -m "Comentario del cambio"
+                    $ git push
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_02.  Clonar un proyecto 'Github': --------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Abrir su cuenta de 'Github' y en la parte superior derecha, dar click al 'Nombre de su cuenta / Your Repositories'. 
+
+            02. Dar click al proyecto que desea clonar, en el caso del ejemplo es 'proyecto'.
+
+            03. Dar click a la opción '<> Code / Copy url to clipboard'.
+
+            04. Ir a una carpeta de Windows, por ejemplo, en el 'C:\xampp\htdocs' (en el caso del ejemplo, 'proyecto').
+
+            05. Click derecho sobre el área de trabajo y seleccionar la opción 'Open Git Bash here'; si no se encuentra la opción, hay que instalar 
+                'Git'.
+ 
+            06. En el 'Git Bash' pegar el repositorio clonado de 'Github' con 'CTRL + INSERT', quedando como sigue:
+
+                         $ git clone https://github.com/SenaProfeAlbeiro/proyecto.git
+
+                    ⦿   Si el proyecto ya se encuentra en el computador, puede utilizar el siguiente comando para actualizar la información:
+                    
+                         $ git pull
+            
+            07. Abrir el proyecto en Visual Studio Code.
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_03.  Cambiar los puertos de 'Apache' en 'XAMPP': -----------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                         
+            01. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (httpd.conf)'.
+            
+            02. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            
+            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '80' y dar click a 'Buscar siguiente'.
+            
+            04. Reemplazar todos los valores donde se encentre el puerto '80' con el puerto nuevo de trabajo, por ejemplo, '8080'. Dar click en 
+                'cancelar' y guardar los cambios en el archivo.
+
+            05. En el Panel de control de XAMPP dar click en 'start' de 'Apache' para iniciar el servicio.
+            
+            06. Comprobar que quedó de la forma correcta a través del navegador, con el siguiente enlace:
+
+                         http://localhost:8080/proyecto/
+            
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_04.  Cambiar los puertos de 'MySQL' en 'XAMPP': ------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. En el Panel de control de XAMPP y en la misma línea del servicio 'MySQL' dar click a 'Config / my.ini'.
+
+            02. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+            
+            03. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click a 'Buscar siguiente'.
+
+            04. Reemplazar todos los valores donde se encentre el puerto '3306' con el puerto nuevo de trabajo, por ejemplo, '3308'. Dar click en 
+                'cancelar' y guardar los cambios en el archivo.
+
+            05. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / Apache (php.ini)'.
+
+            06. Se abrirá un 'Bloc de Notas'. Dar click a la opción 'Edición / Buscar...' (o presionar las teclas 'CTRL + B').
+
+            07. En la ventana emergente y en el control de texto 'Buscar: ', escribir '3306' y dar click a 'Buscar siguiente'.
+
+            08. Reemplazar todos los valores donde se encentre el puerto '3306' con el puerto nuevo de trabajo, por ejemplo, '3308'. Dar click en 
+                'cancelar' y guardar los cambios en el archivo.
+        
+            09. En el Panel de control de XAMPP y en la misma línea del servicio 'Apache' dar click a 'Config / phpMyAdmin (config.inc.php)'.
+
+            10. Buscar la línea '$cfg['Servers'][$i]['host'] = '127.0.0.1;' y agregar el puerto nuevo '3308' de la siguiente forma:
+                         
+                         $cfg['Servers'][$i]['host'] = '127.0.0.1:3308';
+
+            11. En el Panel de control de XAMPP dar click en 'start' de 'MySQL' para iniciar el servicio.
+
+            12. Comprobar que quedó de la forma correcta a través del navegador, con el siguiente enlace:
+
+                         http://localhost:8080/phpmyadmin/            
+
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-- AX_05.  Puesta en marcha del proyecto: ------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            01. Garantizar el ambiente de desarrollo (Ver apartado 01. ENTORNO DE DESARROLLO).
+            
+            02. Clonar el proyecto desde github en 'C:\xampp\htdocs' (Ver apartado AX_02. Clonar un proyecto 'Github').
+            
+            03. Abrir el proyecto en Visual Studio Code.
+            
+            04. Abrir 'XAMPP' y ejecutar los servicios de 'Apache' y 'MySQL'.
+
+            05. Abrir un navegador (preferiblemente Google Chrome) a través de los siguientes enlaces:
+            
+                    http://localhost/proyecto/
+
+                    http://localhost/phpmyadmin/            
+            
+                    ⦿   Si el puerto de 'Apache' en 'XAMPP' es diferente al '80' y si es posible, cambiar el puerto al '80' (Ver apartado AX_03. 
+                         Cambiar los puertos de 'Apache' en 'XAMPP'); si no es posible, agregar el puerto al 'localhost', por ejemplo, si el puerto 
+                         es '8080' entonces debería quedar así:
+
+                         http://localhost:8080/proyecto/
+
+                         http://localhost:8080/phpmyadmin/            
+            
+                    ⦿   Si el puerto de 'MySQL' en 'XAMPP' es diferente al '3306' y si es posible, cambiar el puerto al '3306' (Ver apartado AX_04. 
+                         Cambiar los puertos de 'MySQL' en 'XAMPP').
+                                    
+            06. Subir la base de datos (Ver el apartado 03. BASE DE DATOS).
+
+            07. Comprobar que se ejecute correctamente la aplicación.
